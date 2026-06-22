@@ -4,66 +4,72 @@ import RiskBadge from "../RiskBadge/RiskBadge";
 
 import "./WeatherPanel.css";
 
-function WeatherPanel({
-  isOpen,
-  onClose,
-  regionName,
-  weather,
-  risk,
-}) {
+function WeatherPanel({ isOpen, onClose, regionName, weather, risk }) {
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay sombre */}
           <motion.div
             className="overlay"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
 
-          {/* Panel */}
           <motion.div
             className="weather-panel"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
           >
             <div className="panel-header">
-              <h2>{regionName}</h2>
-              <button onClick={onClose}>✕</button>
+              <div className="panel-header-left">
+                <div className="panel-header-location">
+                  Sénégal
+                </div>
+                <h2>{regionName}</h2>
+              </div>
+              <button onClick={onClose} aria-label="Fermer">✕</button>
             </div>
 
             {weather ? (
-              <div className="panel-content">
+              <>
                 <div className="weather-main">
-                  <img
-                    src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                    alt="weather icon"
-                  />
-
-                  <h1>{weather.temp.toFixed(1)}°C</h1>
+                  <div className="weather-icon-wrap">
+                    <img
+                      src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                      alt="icône météo"
+                    />
+                  </div>
+                  <div className="weather-temp-block">
+                    <h1>{weather.temp.toFixed(1)}°C</h1>
+                    <p className="desc">{weather.description}</p>
+                  </div>
                 </div>
-
-                <p className="desc">
-                  {weather.description}
-                </p>
 
                 <div className="details">
-                  <p>💧 Humidité: {weather.humidity}%</p>
-                  <p>🌬 Vent: {weather.wind} m/s</p>
+                  <div className="detail-card">
+                    <div className="detail-label">💧 Humidité</div>
+                    <div className="detail-value">
+                      {weather.humidity}<span className="detail-unit">%</span>
+                    </div>
+                  </div>
+                  <div className="detail-card">
+                    <div className="detail-label">🌬 Vent</div>
+                    <div className="detail-value">
+                      {weather.wind}<span className="detail-unit">m/s</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Risque agricole */}
-                {risk && (
-                  <RiskBadge risk={risk} />
-                )}
-              </div>
+                {risk && <RiskBadge risk={risk} />}
+              </>
             ) : (
-              <p>Chargement des données...</p>
+              <p style={{ color: "rgba(255,255,255,0.6)", padding: "20px" }}>
+                Chargement des données...
+              </p>
             )}
           </motion.div>
         </>
