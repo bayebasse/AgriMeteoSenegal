@@ -1,0 +1,42 @@
+.map-container {
+  width: 100%;
+  height: auto;
+}
+
+.map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Régions du Sénégal uniquement */
+.map-container #features path {
+  fill: #1e88e5;
+
+  stroke: #ffffff;
+
+  stroke-width: 1.5;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.map-container #features path:hover {
+  fill: #ffc107;
+
+  opacity: 0.95;
+}
+
+/* Région sélectionnée */
+.region-selected {
+  fill: #0d47a1 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-container {
+    width: 100%;
+  }
+}

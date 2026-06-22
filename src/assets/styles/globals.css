@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+body {
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+  background: var(--light-gray);
+
+  color: #222;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.dashboard {
+  padding: 2rem;
+}
+
+.dashboard h1 {
+  color: var(--dark-blue);
+
+  margin-bottom: 1rem;
+}
+
+.dashboard p {
+  font-size: 1.1rem;
+}

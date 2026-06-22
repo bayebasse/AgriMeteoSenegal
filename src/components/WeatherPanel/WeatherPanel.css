@@ -1,0 +1,67 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 10;
+}
+
+.weather-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 11;
+
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px;
+  background: #1e88e5;
+  color: white;
+}
+
+.panel-header button {
+  background: transparent;
+  color: white;
+  font-size: 20px;
+}
+
+.panel-content {
+  padding: 20px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weather-main h1 {
+  font-size: 40px;
+  color: #0d47a1;
+}
+
+.desc {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.details {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

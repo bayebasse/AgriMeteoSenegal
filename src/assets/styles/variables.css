@@ -1,0 +1,23 @@
+:root {
+  --primary-blue: #1e88e5;
+  --dark-blue: #0d47a1;
+
+  --primary-yellow: #ffc107;
+
+  --white: #ffffff;
+
+  --light-gray: #f5f7fa;
+
+  --success: #4caf50;
+
+  --warning: #ff9800;
+
+  --danger: #f44336;
+
+  --shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1);
+
+  --radius: 12px;
+
+  --transition: 0.3s ease;
+}
