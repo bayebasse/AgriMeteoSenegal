@@ -3,8 +3,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import RiskBadge from "../RiskBadge/RiskBadge";
 
 import "./WeatherPanel.css";
+import PredictionChart from "../PredictionChart/PredictionChart";
+import Loader from "../Loader/Loader";
 
-function WeatherPanel({ isOpen, onClose, regionName, weather, risk }) {
+
+
+function WeatherPanel({ isOpen,
+  onClose,
+  regionName,
+  weather,
+  risk,
+  loading,
+  error }) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -34,7 +44,13 @@ function WeatherPanel({ isOpen, onClose, regionName, weather, risk }) {
               <button onClick={onClose} aria-label="Fermer">✕</button>
             </div>
 
-            {weather ? (
+            {loading ? (
+  <Loader />
+) : error ? (
+  <p style={{ color: "red", padding: "20px" }}>
+    {error}
+  </p>
+) : weather ? (
               <>
                 <div className="weather-main">
                   <div className="weather-icon-wrap">
@@ -65,6 +81,7 @@ function WeatherPanel({ isOpen, onClose, regionName, weather, risk }) {
                 </div>
 
                 {risk && <RiskBadge risk={risk} />}
+                <PredictionChart weather={weather} />
               </>
             ) : (
               <p style={{ color: "rgba(255,255,255,0.6)", padding: "20px" }}>

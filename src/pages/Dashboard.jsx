@@ -14,7 +14,12 @@ import "./Dashboard.css";
 function Dashboard() {
   const [selectedRegion, setSelectedRegion] = useState("dakar");
   const [panelOpen, setPanelOpen] = useState(false);
-  const { weather, loading, fetchWeather } = useWeather();
+  const {
+  weather,
+  loading,
+  error,
+  fetchWeather,
+} = useWeather();
   const [risk, setRisk] = useState(null);
 
   useEffect(() => {
@@ -63,13 +68,15 @@ function Dashboard() {
               />
             </div>
 
-            <WeatherPanel
-              isOpen={panelOpen}
-              onClose={() => setPanelOpen(false)}
-              regionName={selectedRegion}
-              weather={weather}
-              risk={risk}
-            />
+           <WeatherPanel
+  isOpen={panelOpen}
+  onClose={() => setPanelOpen(false)}
+  regionName={regions[selectedRegion]?.name}
+  weather={weather}
+  risk={risk}
+  loading={loading}
+  error={error}
+/>
           </div>
         </main>
       </div>

@@ -6,6 +6,10 @@
   backdrop-filter: blur(4px);
   z-index: 10;
 }
+.chart-container {
+  margin-top: 20px;
+  animation: fadeIn 0.3s ease;
+}
 
 .weather-panel {
   position: fixed;
