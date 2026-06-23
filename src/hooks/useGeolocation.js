@@ -1,29 +1,30 @@
-import { useState } from "react";
-import { getUserPosition } from "../services/geolocationService";
+import { useState, useEffect } from "react";
+import { findNearestRegion } from "../services/geolocationService";
+
+const DAKAR_FALLBACK = "dakar";
+const MAX_DISTANCE = 2; // seuil arbitraire pour "hors Sénégal"
 
 export function useGeolocation() {
-  const [position, setPosition] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [regionId, setRegionId] = useState(null);
 
-  const getLocation = async () => {
-    setLoading(true);
-    setError(null);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const nearest = findNearestRegion(lat, lon);
 
-    try {
-      const pos = await getUserPosition();
-      setPosition(pos);
-    } catch (err) {
-      setError("Position non disponible");
-    } finally {
-      setLoading(false);
-    }
-  };
+        // calcule de la distance  si on veux vérifier le seuil
+        setRegionId(nearest.id);
 
-  return {
-    position,
-    loading,
-    error,
-    getLocation,
-  };
+      },
+      (error) => {
+        setRegionId(DAKAR_FALLBACK);
+      }
+    );
+  }, []);
+
+  return regionId;
 }
+
+

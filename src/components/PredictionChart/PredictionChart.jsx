@@ -1,62 +1,35 @@
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
-  Title,
   Tooltip,
-  Legend,
 } from "chart.js";
+import { generateHistory } from "../../utils/predictionGenerator";
 
-import { Line } from "react-chartjs-2";
 
-import { generatePrediction } from "../../utils/predictionGenerator";
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+function WeatherChart({ currentTemp }) {
+  if (!currentTemp) return null;
 
-function PredictionChart({ weather }) {
-  if (!weather) return null;
+  const history = generateHistory(currentTemp);
 
-  const data7Days = generatePrediction(
-    weather.temp,
-    weather.humidity
-  );
-
-  const chartData = {
-    labels: data7Days.map((d) => d.day),
-
+  const data = {
+    labels: history.map(h => h.day),
     datasets: [
       {
         label: "Température (°C)",
-        data: data7Days.map((d) => d.temp),
-        borderColor: "#FF9800",
-        backgroundColor: "#FF9800",
-      },
-      {
-        label: "Humidité (%)",
-        data: data7Days.map((d) => d.humidity),
-        borderColor: "#1E88E5",
-        backgroundColor: "#1E88E5",
+        data: history.map(t => t.temp),
+        borderColor: "#2c7a4b",
       },
     ],
   };
 
-  return (
-    <div style={{ marginTop: "20px" }}>
-      <h3>Prévision 7 jours</h3>
-
-      <Line data={chartData} />
-    </div>
-  );
+  return <Line data={data} />;
 }
 
-export default PredictionChart;
+export default WeatherChart;
+

@@ -1,26 +1,19 @@
-export function generatePrediction(temp, humidity) {
-  const days = 7;
+export function generateHistory(currentTemp) {
+    
+  const history = [];
 
-  const data = [];
+  for (let i = 6; i >= 0; i--) {
+    const variation = Math.random() * 6 - 3;
 
-  for (let i = 0; i < days; i++) {
-    const tempVariation =
-      (Math.random() * 6 - 3).toFixed(1);
-
-    const humidityVariation =
-      (Math.random() * 10 - 5).toFixed(0);
-
-    data.push({
-      day: `J+${i + 1}`,
-      temp:
-        Number(temp) +
-        Number(tempVariation),
-
-      humidity:
-        Number(humidity) +
-        Number(humidityVariation),
+    history.push({
+      day: `J-${i}`,
+      temp: parseFloat((currentTemp + variation).toFixed(1)),
     });
+
   }
 
-  return data;
+  return history;
+
 }
+
+

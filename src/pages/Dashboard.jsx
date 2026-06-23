@@ -1,87 +1,80 @@
-import { useEffect, useState } from "react";
-
-import SenegalMap from "../components/Map/SenegalMap";
-import WeatherPanel from "../components/WeatherPanel/WeatherPanel";
-
-import { useWeather } from "../hooks/useWeather";
-import { regions } from "../data/regions";
-
-import { calculateRisk } from "../utils/calculateRisk";
-
 import "./Dashboard.css";
-
+import { useState, useEffect } from "react";
+import Map from "../components/Map/SenegalMap";
+import WeatherPanel from "../components/WeatherPanel/WeatherPanel";
+import { useWeather } from "../hooks/useWeather";
+import { useGeolocation } from "../hooks/useGeolocation";
+import { regions } from "../data/regions";
+import WeatherChart from "../components/PredictionChart/PredictionChart";
+import { Link, Outlet } from "react-router-dom";
 
 function Dashboard() {
-  const [selectedRegion, setSelectedRegion] = useState("dakar");
-  const [panelOpen, setPanelOpen] = useState(false);
-  const {
-  weather,
-  loading,
-  error,
-  fetchWeather,
-} = useWeather();
-  const [risk, setRisk] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState(null);
+  const geoRegionId = useGeolocation();
+  const { weather, loading, error, fetchWeather } = useWeather();
 
+  // Effet 1 : définir la région depuis la géolocalisation
   useEffect(() => {
-    const region = regions[selectedRegion];
-    if (!region) return;
-    fetchWeather(region.lat, region.lon);
-    setPanelOpen(true);
+    if (geoRegionId && !selectedRegion) {
+      setSelectedRegion(geoRegionId);
+    }
+  }, [geoRegionId, selectedRegion]);
+
+  // Effet 2 : fetch météo quand la région change
+  useEffect(() => {
+    if (selectedRegion) {
+      const region = regions.find(r => r.id === selectedRegion);
+
+      if (region) {
+        fetchWeather(region.lat, region.lon);
+      }
+    }
   }, [selectedRegion]);
 
-  useEffect(() => {
-    if (weather) setRisk(calculateRisk(weather.temp, weather.humidity));
-  }, [weather]);
+  // clic sur une région
+  function handleSelectRegion(id) {
+    setSelectedRegion(id);
+  }
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-topbar">
-        <div className="db-logo">
-          <div>
-            <h1 className="db-logo-title">AgroMétéo Sénégal</h1>
+    <div className="app-layout">
+      <aside className="sidebar">
+        <div className="sidebar-logo">🌾 AgriMétéo<span>-SN</span></div>
+        <nav>
+          <div className="sidebar-menu-item active">Dashboard</div>
+          <Link className="sidebar-menu-item" to="/alerte"> Alertes </Link>
+         
+        </nav>
+         <Outlet /> 
+      </aside>
+
+      <main className="main-content">
+        <div className="topbar">
+          <input type="text" placeholder="Rechercher une région..." />
+        </div>
+
+        <div className="content-grid">
+          <div className="card map-card">
+            <Map selectedRegion={selectedRegion} onSelectRegion={handleSelectRegion} />
+          </div>
+
+          <div className="card panel-card">
+            <WeatherPanel
+              selectedRegion={selectedRegion}
+              weather={weather}
+              loading={loading}
+              error={error}
+            />
           </div>
         </div>
-    
-      </div>
 
-      <div className="dashboard-body">
-        <aside className="dashboard-sidebar">
-          <nav className="db-nav">
-            <div className="db-nav-item active">Carte météo</div>
-            <div className="db-nav-item">Analyses</div>
-            <div className="db-nav-item">Cultures</div>
-            <div className="db-nav-item">Alertes</div>
-          </nav>
-        </aside>
-
-        <main className="dashboard-main">
-          
-          <div className="dashboard-content">
-            <div className="map-card">
-              <div className="map-card-header">
-                <span className="map-card-title">Carte des régions</span>
-                <span className="db-badge">14 régions</span>
-              </div>
-              <SenegalMap
-                selectedRegion={selectedRegion}
-                setSelectedRegion={setSelectedRegion}
-              />
-            </div>
-
-           <WeatherPanel
-  isOpen={panelOpen}
-  onClose={() => setPanelOpen(false)}
-  regionName={regions[selectedRegion]?.name}
-  weather={weather}
-  risk={risk}
-  loading={loading}
-  error={error}
-/>
-          </div>
-        </main>
-      </div>
+        <div className="card chart-card">
+          <WeatherChart currentTemp={weather?.temp} />
+        </div>
+      </main>
     </div>
   );
 }
 
 export default Dashboard;
+

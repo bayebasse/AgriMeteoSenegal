@@ -1,58 +1,29 @@
-.map-container { width: 100%; height: auto; flex: 1; }
-
-.map-container svg { width: 100%; height: auto; display: block; }
-
-.map-container #features path {
-  fill: rgba(255,255,255,0.16);
-  stroke: rgba(255,255,255,0.4);
-  stroke-width: 1.2;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.map-container #features path:hover {
-  fill: rgba(100,200,255,0.35);
-  stroke: rgba(150,220,255,0.7);
-}
-
-.region-selected {
-  fill: rgba(76,222,127,0.3) !important;
-  stroke: rgba(76,222,127,0.8) !important;
-  stroke-width: 2 !important;
-}
-
-.map-wrapper {
-  position: relative;
+.senegal-map {
   width: 100%;
+  height: auto;
 }
 
-.map-container path {
+.region {
+  fill: #6f9c76;
   cursor: pointer;
-  transition: fill 0.2s ease, stroke 0.2s ease;
-  stroke: #ffffff;
-  stroke-width: 0.5;
+  transition: fill 0.2s ease, opacity 0.2s ease;
 }
 
-.map-container path:hover {
-  fill: #74a9d8; /* couleur au survol */
+.region:hover {
+  opacity: 0.7;
 }
 
-.region-selected {
-  fill: #1e6fbf !important; /* couleur de la région sélectionnée */
+.region.selected {
+  fill: #1a4a7a;
+  
 }
 
-.region-tooltip {
-  position: absolute;
-  transform: translate(-50%, -130%);
-  background: #1a1a1a;
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
+.region-label {
+  font-size: 10px;
+  fill: #1F2A24;
+  text-anchor: middle;
   pointer-events: none;
-  z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  font-weight: 500;
 }
 

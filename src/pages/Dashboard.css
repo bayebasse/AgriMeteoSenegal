@@ -1,122 +1,85 @@
-.dashboard {
-  min-height: 100vh;
-  background: linear-gradient(150deg, #0f2744 0%, #1a4a7a 45%, #2d7aab 80%, #3a9fd4 100%);
-  display: flex;
-  flex-direction: column;
-  font-family: 'Inter', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&display=swap');
 
-.dashboard-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.db-logo { display: flex; align-items: center; gap: 12px; }
-
-.db-logo-icon {
-  width: 36px; height: 36px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-
-.db-logo-title {
-  font-size: 100%; font-weight: 600;
-  color: rgba(255,255,255,0.5); margin: 0; letter-spacing: -0.2px;
-}
-
-.db-logo-sub {
-  font-size: 11px; ; margin: 0;
-}
-
-.db-pill {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 20px; padding: 5px 12px;
-  font-size: 12px; color: rgba(255,255,255,0.75);
-  display: flex; align-items: center; gap: 6px;
-}
-
-.db-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%; background: #4cde7f;
-}
-
-.dashboard-body {
-  display: flex; flex: 1;
-}
-
-.dashboard-sidebar {
-  width: 200px; flex-shrink: 0;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  padding: 20px 14px;
-}
-
-.db-nav-label {
-  font-size: 10px; text-transform: uppercase;
-  letter-spacing: 0.7px; color: rgba(255,255,255,0.3);
-  padding: 0 12px; margin-bottom: 8px;
-}
-
-.db-nav { display: flex; flex-direction: column; gap: 3px; margin-top: 50%;}
-
-.db-nav-item {
-  display: flex; align-items: center; gap: 9px;
-  padding: 9px 12px; border-radius: 10px;
-  font-size: 13px; color: rgba(255,255,255,0.55);
-  cursor: pointer; transition: all 0.2s;
-}
-
-.db-nav-item.active {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #fff; font-weight: 500;
-}
-
-.dashboard-main {
-  flex: 1; display: flex;
-  flex-direction: column;
-  padding: 20px; gap: 16px;
-}
-
-.dashboard-stats {
+/* App.css */
+.app-layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  background: #F7F6F3;
+  font-family: 'Syne', sans-serif;
 }
 
-.dashboard-content {
-  display: flex; gap: 16px; flex: 1;
+.sidebar {
+  background: linear-gradient(150deg, #0f2744 0%, #1a4a7a 45%, #2d7aab 80%, #3a9fd4 100%);
+  color: #F7F6F3;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.sidebar-logo span{
+  color: #6f9c76
+}
+
+.sidebar-menu-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #cfd8d3;
+}
+
+.sidebar-menu-item.active {
+  background: white;
+  color: #1a4a7a
+}
+
+.main-content {
+  padding: 24px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+}
+
+.topbar {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.topbar input {
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
 .map-card {
-  flex: 1;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 16px;
-  padding: 18px;
-  display: flex; flex-direction: column;
+  min-height: 480px;
 }
 
-.map-card-header {
-  display: flex; align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.map-card-title {
-  font-size: 13px; font-weight: 500; color: #fff;
-}
-
-.db-badge {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 8px; padding: 3px 9px;
-  font-size: 11px; color: rgba(255,255,255,0.6);
+.chart-card {
+  grid-column: 1 / -1;
 }
 
