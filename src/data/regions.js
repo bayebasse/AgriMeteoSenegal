@@ -1,72 +1,17 @@
-export const regions = {
-  dakar: {
-    name: "Dakar",
-    lat: 14.7167,
-    lon: -17.4677,
-  },
-  thies: {
-    name: "Thiès",
-    lat: 14.7886,
-    lon: -16.9260,
-  },
-  diourbel: {
-    name: "Diourbel",
-    lat: 14.6561,
-    lon: -16.2345,
-  },
-  fatick: {
-    name: "Fatick",
-    lat: 14.3390,
-    lon: -16.4111,
-  },
-  kaolack: {
-    name: "Kaolack",
-    lat: 14.1652,
-    lon: -16.0716,
-  },
-  kaffrine: {
-    name: "Kaffrine",
-    lat: 14.1050,
-    lon: -15.5500,
-  },
-  louga: {
-    name: "Louga",
-    lat: 15.6167,
-    lon: -16.2167,
-  },
-  "saint-louis": {
-    name: "Saint-Louis",
-    lat: 16.0179,
-    lon: -16.4896,
-  },
-  matam: {
-    name: "Matam",
-    lat: 15.6559,
-    lon: -13.2550,
-  },
-  tambacounda: {
-    name: "Tambacounda",
-    lat: 13.7707,
-    lon: -13.6673,
-  },
-  kedougou: {
-    name: "Kédougou",
-    lat: 12.5603,
-    lon: -12.1742,
-  },
-  kolda: {
-    name: "Kolda",
-    lat: 12.8833,
-    lon: -14.9500,
-  },
-  sedhiou: {
-    name: "Sédhiou",
-    lat: 12.7081,
-    lon: -15.5569,
-  },
-  ziguinchor: {
-    name: "Ziguinchor",
-    lat: 12.5833,
-    lon: -16.2719,
-  },
-};
+export const regions = [
+  { id: "dakar", nom: "Dakar", lat: 14.6928, lon: -17.4467 },
+  { id: "thies", nom: "Thiès", lat: 14.7910, lon: -16.9359 },
+  { id: "diourbel", nom: "Diourbel", lat: 14.6592, lon: -16.2316 },
+  { id: "fatick", nom: "Fatick", lat: 14.3390, lon: -16.4110 },
+  { id: "kaolack", nom: "Kaolack", lat: 14.1825, lon: -16.0728 },
+  { id: "kaffrine", nom: "Kaffrine", lat: 14.1059, lon: -15.5500 },
+  { id: "louga", nom: "Louga", lat: 15.6173, lon: -16.2240 },
+  { id: "saint-louis", nom: "Saint-Louis", lat: 16.0179, lon: -16.4896 },
+  { id: "matam", nom: "Matam", lat: 15.6559, lon: -13.2548 },
+  { id: "tambacounda", nom: "Tambacounda", lat: 13.7707, lon: -13.6673 },
+  { id: "kedougou", nom: "Kédougou", lat: 12.5556, lon: -12.1779 },
+  { id: "kolda", nom: "Kolda", lat: 12.8939, lon: -14.9412 },
+  { id: "sedhiou", nom: "Sédhiou", lat: 12.7081, lon: -15.5569 },
+  { id: "ziguinchor", nom: "Ziguinchor", lat: 12.5641, lon: -16.2728 },
+];
+

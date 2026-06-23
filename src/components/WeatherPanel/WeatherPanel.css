@@ -1,67 +1,72 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  z-index: 10;
-}
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&display=swap');
 
 .weather-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 380px;
-  height: 100%;
-  background: #ffffff;
-  z-index: 11;
-
-  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
-
+  border-radius: 24px;
+  padding: 28px;
+  color: white;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.3s ease;
+  font-family: 'Syne', sans-serif;
 }
 
-.panel-header {
+.weather-panel.risk-normal {
+  background: linear-gradient(150deg, #0f2744 0%, #1a4a7a 45%, #2d7aab 80%, #3a9fd4 100%);
+}
+
+.weather-panel.risk-high {
+  background: linear-gradient(160deg, #2A2D35 0%, #1C1F26 100%);
+}
+
+.weather-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 15px;
-  background: #1e88e5;
-  color: white;
+  font-size: 0.85rem;
+  opacity: 0.85;
 }
 
-.panel-header button {
-  background: transparent;
-  color: white;
-  font-size: 20px;
+.weather-panel-icon {
+  width: 64px;
+  height: 64px;
+  margin: 12px 0;
 }
 
-.panel-content {
-  padding: 20px;
+.weather-panel-temp {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
-.weather-main {
+.weather-panel-region {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.weather-panel-stats {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.15);
 }
 
-.weather-main h1 {
-  font-size: 40px;
-  color: #0d47a1;
+.weather-panel-stat-label {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-bottom: 4px;
 }
 
-.desc {
-  margin-top: 10px;
-  font-style: italic;
+.weather-panel-stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.details {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.weather-panel .error {
+  color: #FFB4B4;
 }
+

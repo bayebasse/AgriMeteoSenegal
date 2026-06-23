@@ -1,63 +1,27 @@
-import { useEffect } from "react";
-
+import { senegalPaths } from "../../data/senegalPaths";
 import "./SenegalMap.css";
 
-import SenegalSVG from "../../assets/svg/senegal.svg?raw";
-
-function SenegalMap({
-  selectedRegion,
-  setSelectedRegion,
-}) {
-  useEffect(() => {
-    const svgContainer =
-      document.getElementById("senegal-map");
-
-    if (!svgContainer) return;
-
-    // On cible uniquement les régions
-    const regions =
-      svgContainer.querySelectorAll(
-        "#features path"
-      );
-
-    regions.forEach((region) => {
-      region.classList.remove(
-        "region-selected"
-      );
-
-      if (
-        region.id === selectedRegion
-      ) {
-        region.classList.add(
-          "region-selected"
-        );
-      }
-    });
-  }, [selectedRegion]);
-
-  const handleClick = (event) => {
-    const region =
-      event.target.closest("path");
-
-    if (!region) return;
-
-    const regionId = region.id;
-
-    if (!regionId) return;
-
-    setSelectedRegion(regionId);
-  };
-
+function Map({ selectedRegion, onSelectRegion }) {
   return (
-    <div
-      id="senegal-map"
-      className="map-container"
-      onClick={handleClick}
-      dangerouslySetInnerHTML={{
-        __html: SenegalSVG,
-      }}
-    />
+    <>
+    <svg viewBox="0 0 1000 736" className="senegal-map">
+      {senegalPaths.map((region) => (
+        <path
+          key={region.id}
+          id={region.id}
+          d={region.d}
+          className={
+            selectedRegion === region.id
+              ? "region selected"
+              : "region"
+          }
+          onClick={() => onSelectRegion(region.id)}
+        />
+      ))}
+    </svg>
+    </>
   );
 }
 
-export default SenegalMap;
+export default Map;
+

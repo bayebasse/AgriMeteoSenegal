@@ -1,75 +1,53 @@
-import { motion, AnimatePresence } from "framer-motion";
-
+import { senegalPaths } from "../../data/senegalPaths";
+import { calculateRisk } from "../../utils/calculateRisk";
 import RiskBadge from "../RiskBadge/RiskBadge";
-
 import "./WeatherPanel.css";
 
-function WeatherPanel({
-  isOpen,
-  onClose,
-  regionName,
-  weather,
-  risk,
-}) {
+function WeatherPanel({ selectedRegion, weather, loading, error }) {
+  if (!selectedRegion) {
+    return null;
+  }
+
+  const region = senegalPaths.find((r) => r.id === selectedRegion);
+  const risk = weather ? calculateRisk(weather.temp, weather.humidity) : null;
+  const panelClass = risk && risk.score >= 35 ? "risk-high" : "risk-normal";
+
   return (
-    <AnimatePresence>
-      {isOpen && (
+    <div className={`weather-panel ${panelClass}`}>
+      <div className="weather-panel-header">
+        <span>Aujourd'hui</span>
+      </div>
+
+      {loading && <p>Chargement des données météo...</p>}
+      {error && <p className="error">{error}</p>}
+
+      {weather && !loading && !error && (
         <>
-          {/* Overlay sombre */}
-          <motion.div
-            className="overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
+          <img
+            className="weather-panel-icon"
+            src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+            alt={weather.description}
           />
+          <div className="weather-panel-temp">{weather.temp}°</div>
+          <div className="weather-panel-region">{region.name}</div>
 
-          {/* Panel */}
-          <motion.div
-            className="weather-panel"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.25 }}
-          >
-            <div className="panel-header">
-              <h2>{regionName}</h2>
-              <button onClick={onClose}>✕</button>
+          <div className="weather-panel-stats">
+            <div>
+              <div className="weather-panel-stat-label">Humidité</div>
+              <div className="weather-panel-stat-value">{weather.humidity}%</div>
             </div>
+            <div>
+              <div className="weather-panel-stat-label">Condition</div>
+              <div className="weather-panel-stat-value">{weather.description}</div>
+            </div>
+          </div>
 
-            {weather ? (
-              <div className="panel-content">
-                <div className="weather-main">
-                  <img
-                    src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                    alt="weather icon"
-                  />
-
-                  <h1>{weather.temp.toFixed(1)}°C</h1>
-                </div>
-
-                <p className="desc">
-                  {weather.description}
-                </p>
-
-                <div className="details">
-                  <p>💧 Humidité: {weather.humidity}%</p>
-                  <p>🌬 Vent: {weather.wind} m/s</p>
-                </div>
-
-                {/* Risque agricole */}
-                {risk && (
-                  <RiskBadge risk={risk} />
-                )}
-              </div>
-            ) : (
-              <p>Chargement des données...</p>
-            )}
-          </motion.div>
+          <RiskBadge risk={risk} />
         </>
       )}
-    </AnimatePresence>
+    </div>
   );
 }
 
 export default WeatherPanel;
+

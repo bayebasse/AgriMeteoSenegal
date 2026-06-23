@@ -6,24 +6,20 @@ export function useWeather() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchWeather = async (lat, lon) => {
+  async function fetchWeather(lat, lon) {
     setLoading(true);
     setError(null);
-
     try {
       const data = await getWeatherByCoords(lat, lon);
       setWeather(data);
     } catch (err) {
-      setError("Impossible de charger la météo");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  return {
-    weather,
-    loading,
-    error,
-    fetchWeather,
-  };
+  return { weather, loading, error, fetchWeather };
 }
+
+

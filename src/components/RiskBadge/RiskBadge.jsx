@@ -1,18 +1,20 @@
+import "./RiskBadge.css";
+
 function RiskBadge({ risk }) {
+  if (!risk) return null;
+
   return (
-    <div
-      style={{
-        marginTop: "20px",
-        padding: "10px",
-        borderRadius: "10px",
-        background: risk.color,
-        color: "white",
-      }}
-    >
-      <h3>{risk.label}</h3>
-      <p>Score: {risk.score} / 100</p>
+    <div className="risk-badge">
+      <span className="risk-badge-label">{risk.label}</span>
+      <div
+        className="risk-badge-score"
+        style={{ backgroundColor: risk.color }}
+      >
+        {risk.score}
+      </div>
     </div>
   );
 }
 
 export default RiskBadge;
+

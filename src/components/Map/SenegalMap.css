@@ -1,42 +1,29 @@
-.map-container {
+.senegal-map {
   width: 100%;
   height: auto;
 }
 
-.map-container svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Régions du Sénégal uniquement */
-.map-container #features path {
-  fill: #1e88e5;
-
-  stroke: #ffffff;
-
-  stroke-width: 1.5;
-
+.region {
+  fill: #6f9c76;
   cursor: pointer;
-
-  transition: all 0.3s ease;
+  transition: fill 0.2s ease, opacity 0.2s ease;
 }
 
-/* Hover */
-.map-container #features path:hover {
-  fill: #ffc107;
-
-  opacity: 0.95;
+.region:hover {
+  opacity: 0.7;
 }
 
-/* Région sélectionnée */
-.region-selected {
-  fill: #0d47a1 !important;
+.region.selected {
+  fill: #1a4a7a;
+  
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .map-container {
-    width: 100%;
-  }
+.region-label {
+  font-size: 10px;
+  fill: #1F2A24;
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 500;
 }
+
