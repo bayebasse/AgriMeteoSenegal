@@ -143,7 +143,7 @@ L'application sera accessible sur `http://localhost:5173`.
 
 ## Vidéo de démonstration
 
-À ajouter : lien vers la vidéo de démo du projet.
+lien vers la vidéo de démo du projet: https://drive.google.com/file/d/1rX6gz9TVD9thqM2-8RiiJqV6PDasQV5c/view?usp=sharing.
 
 ---
 
