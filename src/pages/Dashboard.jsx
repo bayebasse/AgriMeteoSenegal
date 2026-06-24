@@ -6,7 +6,7 @@ import { useWeather } from "../hooks/useWeather";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { regions } from "../data/regions";
 import WeatherChart from "../components/PredictionChart/PredictionChart";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Dashboard() {
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -40,12 +40,23 @@ function Dashboard() {
     <div className="app-layout">
       <aside className="sidebar">
         <div className="sidebar-logo">🌾 AgriMétéo<span>-SN</span></div>
-        <nav>
-          <div className="sidebar-menu-item active">Dashboard</div>
-          <Link className="sidebar-menu-item" to="/alerte"> Alertes </Link>
-         
-        </nav>
-         <Outlet /> 
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "sidebar-menu-item active" : "sidebar-menu-item"
+            }
+          >
+            Dashboard
+          </NavLink>
+
+          <NavLink
+            to="/alerte"
+            className={({ isActive }) =>
+              isActive ? "sidebar-menu-item active" : "sidebar-menu-item"
+            }
+          >
+            Alertes
+          </NavLink>
       </aside>
 
       <main className="main-content">
