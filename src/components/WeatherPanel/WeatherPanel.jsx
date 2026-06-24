@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { senegalPaths } from "../../data/senegalPaths";
 import { calculateRisk } from "../../utils/calculateRisk";
 import RiskBadge from "../RiskBadge/RiskBadge";
+import { useAdvice } from "../../hooks/useAdvice";
 import "./WeatherPanel.css";
 
 function WeatherPanel({ selectedRegion, weather, loading, error }) {
@@ -11,6 +13,14 @@ function WeatherPanel({ selectedRegion, weather, loading, error }) {
   const region = senegalPaths.find((r) => r.id === selectedRegion);
   const risk = weather ? calculateRisk(weather.temp, weather.humidity) : null;
   const panelClass = risk && risk.score >= 35 ? "risk-high" : "risk-normal";
+
+  const { advice, loading: loadingAdvice, error: errorAdvice, fetchAdvice } = useAdvice();
+
+  useEffect(() => {
+    if (weather && risk) {
+      fetchAdvice(region.name, weather, risk);
+    }
+  }, [weather]);
 
   return (
     <div className={`weather-panel ${panelClass}`}>
@@ -43,6 +53,17 @@ function WeatherPanel({ selectedRegion, weather, loading, error }) {
           </div>
 
           <RiskBadge risk={risk} />
+
+          <div className="weather-panel-advice">
+            {loadingAdvice && <p>Génération du conseil...</p>}
+            {errorAdvice && <p className="error">Conseil indisponible</p>}
+            {advice && !loadingAdvice && (
+              <>
+                <div className="weather-panel-advice-label">Conseil agricole</div>
+                <p>{advice}</p>
+              </>
+            )}
+          </div>
         </>
       )}
     </div>
