@@ -4,27 +4,40 @@
   align-items: center;
   justify-content: center;
 
-  padding: 20px;
+  width: 100%;
+  height: 100vh; /* prend toute la hauteur écran */
+
+  padding: clamp(10px, 3vw, 30px); /* padding adaptable */
+  box-sizing: border-box;
 }
 
+/* Spinner responsive */
 .spinner {
-  width: 40px;
-  height: 40px;
+  width: clamp(30px, 8vw, 60px);  /* taille adaptative */
+  height: clamp(30px, 8vw, 60px);
 
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #1e88e5;
+  border: clamp(3px, 0.6vw, 6px) solid #f3f3f3;
+  border-top: clamp(3px, 0.6vw, 6px) solid #1e88e5;
 
   border-radius: 50%;
 
-  animation: spin 1s linear infinite;
+  animation: spin 0.9s linear infinite;
 }
 
+/* Animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Texte optionnel (si tu ajoutes "Chargement...") */
+.loader-text {
+  margin-top: clamp(10px, 2vw, 20px);
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: #555;
+  text-align: center;
 }

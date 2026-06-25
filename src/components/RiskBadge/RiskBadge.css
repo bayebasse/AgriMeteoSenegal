@@ -2,29 +2,61 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 16px;
-  padding: 10px 16px;
-  border-radius: 14px;
+
+  margin-top: clamp(10px, 2vw, 20px);
+  padding: clamp(8px, 2vw, 14px) clamp(12px, 3vw, 20px);
+
+  border-radius: clamp(10px, 2vw, 16px);
+
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Label */
 .risk-badge-label {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
   font-weight: 600;
   color: white;
 }
 
+/* Score rond */
 .risk-badge-score {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+
+  width: clamp(28px, 6vw, 44px);
+  height: clamp(28px, 6vw, 44px);
+
   border-radius: 50%;
-  font-size: 0.8rem;
+
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
   font-weight: 700;
+
   color: white;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Effet hover (desktop uniquement) */
+@media (hover: hover) {
+  .risk-badge:hover .risk-badge-score {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+}
 
+/* Effet clic mobile */
+.risk-badge:active .risk-badge-score {
+  transform: scale(0.95);
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .risk-badge {
+    gap: 10px;
+  }
+}

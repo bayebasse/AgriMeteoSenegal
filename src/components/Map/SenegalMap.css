@@ -1,29 +1,70 @@
 .senegal-map {
   width: 100%;
   height: auto;
+  max-width: 100%;
+  
+  /* important pour SVG responsive */
+  display: block;
 }
 
+/* Régions */
 .region {
   fill: #6f9c76;
   cursor: pointer;
-  transition: fill 0.2s ease, opacity 0.2s ease;
+
+  transition: fill 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
 }
 
-.region:hover {
-  opacity: 0.7;
+/* Hover (desktop uniquement) */
+@media (hover: hover) {
+  .region:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
 }
 
+/* Région sélectionnée */
 .region.selected {
   fill: #1a4a7a;
-  
+  opacity: 1;
 }
 
+/* Labels (texte sur la carte) */
 .region-label {
-  font-size: 10px;
+  font-size: clamp(8px, 1.2vw, 14px); /* responsive 🔥 */
   fill: #1F2A24;
   text-anchor: middle;
+
   pointer-events: none;
   user-select: none;
+
   font-weight: 500;
+}
+
+/* Amélioration lisibilité mobile */
+@media (max-width: 600px) {
+  .region-label {
+    font-size: 9px;
+  }
+}
+
+/* Tablette */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .region-label {
+    font-size: 11px;
+  }
+}
+
+/* Grand écran */
+@media (min-width: 1200px) {
+  .region-label {
+    font-size: 14px;
+  }
+}
+
+/* Option: effet clic mobile */
+.region:active {
+  opacity: 0.6;
+  transform: scale(0.98);
 }
 
