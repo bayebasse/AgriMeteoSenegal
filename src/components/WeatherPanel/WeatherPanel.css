@@ -1,17 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&display=swap');
 
 .weather-panel {
-  border-radius: 24px;
-  padding: 28px;
+  border-radius: clamp(16px, 3vw, 28px);
+  padding: clamp(16px, 4vw, 32px);
+
   color: white;
-  min-height: 320px;
+  min-height: clamp(260px, 40vh, 360px);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   transition: background 0.3s ease;
   font-family: 'Syne', sans-serif;
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Backgrounds */
 .weather-panel.risk-normal {
   background: linear-gradient(150deg, #0f2744 0%, #1a4a7a 45%, #2d7aab 80%, #3a9fd4 100%);
 }
@@ -20,79 +27,113 @@
   background: linear-gradient(160deg, #2A2D35 0%, #1C1F26 100%);
 }
 
+/* Header */
 .weather-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
+
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
   opacity: 0.85;
 }
 
+/* Icon */
 .weather-panel-icon {
-  width: 64px;
-  height: 64px;
-  margin: 12px 0;
+  width: clamp(40px, 10vw, 70px);
+  height: clamp(40px, 10vw, 70px);
+  margin: clamp(8px, 2vw, 16px) 0;
 }
 
+/* Température */
 .weather-panel-temp {
-  font-size: 3.5rem;
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
   font-weight: 700;
   line-height: 1;
 }
 
+/* Région */
 .weather-panel-region {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   font-weight: 500;
   opacity: 0.9;
   margin-top: 4px;
 }
 
+/* Stats */
 .weather-panel-stats {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  padding-top: 16px;
+  gap: clamp(8px, 2vw, 20px);
+
+  margin-top: clamp(14px, 3vw, 24px);
+  padding-top: clamp(10px, 2vw, 18px);
+
   border-top: 1px solid rgba(255,255,255,0.15);
 }
 
 .weather-panel-stat-label {
-  font-size: 0.75rem;
+  font-size: clamp(0.65rem, 1.5vw, 0.8rem);
   opacity: 0.7;
   margin-bottom: 4px;
 }
 
 .weather-panel-stat-value {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   font-weight: 600;
 }
 
+/* Error */
 .weather-panel .error {
   color: #FFB4B4;
 }
 
+/* Advice box */
 .weather-panel-advice {
-  margin-top: 16px;
-  padding: 14px 16px;
-  border-radius: 16px;
+  margin-top: clamp(12px, 3vw, 20px);
+  padding: clamp(10px, 3vw, 16px);
+
+  border-radius: clamp(12px, 3vw, 18px);
+
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+/* Texte advice */
 .weather-panel-advice p {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
   line-height: 1.5;
   opacity: 0.95;
   margin: 0;
 }
 
+/* Label advice */
 .weather-panel-advice-label {
   font-family: 'Syne', sans-serif;
-  font-size: 0.7rem;
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
   font-weight: 700;
+
   text-transform: uppercase;
   letter-spacing: 0.05em;
+
   opacity: 0.6;
   margin-bottom: 6px;
+}
+
+/* Hover uniquement desktop */
+@media (hover: hover) {
+  .weather-panel:hover {
+    transform: translateY(-3px);
+    transition: transform 0.25s ease;
+  }
+}
+
+/* Mobile optimisation */
+@media (max-width: 480px) {
+  .weather-panel-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
